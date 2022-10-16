@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react';
 import { Row, Col } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
+import Message from '../components/Message';
+import Loader from '../components/Loader';
 import { fetchProductsStartAsync } from '../store/reducers/product/product.action';
 import { selectProducts, selectIsLoading, selectIsError} from '../store/reducers/product/product.select';
 // import products from '../products';
@@ -33,9 +35,9 @@ useEffect(() => {
      <h1>Latest Products</h1>
      {
       isLoading ? (
-      <h1>Loading...</h1>
+      <Loader/>
       ) : error ? (
-      <h3>{error}</h3>
+      <Message variant='danger'>{error}</Message>
       ) : (    
       <Row>
         {
