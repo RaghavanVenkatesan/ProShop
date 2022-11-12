@@ -20,12 +20,12 @@ return [...cartItems, productToAdd];
 const removeCartItem = (cartItems, cartItemToRemove) => {
     // find the cart item to remove
     const existingCartItem = cartItems.find(
-      (cartItem) => cartItem.product === cartItemToRemove.product
+      (cartItem) => cartItem.product === cartItemToRemove
     );
   
     // check if quantity is equal to 1, if it is remove that item from the cart
     if (existingCartItem) {
-      return cartItems.filter((cartItem) => cartItem.product !== cartItemToRemove.product);
+      return cartItems.filter((cartItem) => cartItem.product !== cartItemToRemove);
     }
   
   };
@@ -52,14 +52,15 @@ const removeCartItem = (cartItems, cartItemToRemove) => {
     localStorage.setItem('cartItems', JSON.stringify(getState().cart.cartItems));
   }
   };
+
+  const remove_add = (newCartItems) => createAction(CART_ACTION_TYPES.REMOVE_PRODUCT_CART, newCartItems);
   
   export const removeItemFromCart = (cartItems, id) => {
     return async (dispatch, getState) => {
-      removed_item = cartItems.filter((cartitem) => cartitem.product === id);
 
-      const newCartItems = removeCartItem(cartItems, removed_item);
+      const newCartItems = removeCartItem(cartItems, id);
 
-      dispatch(createAction(CART_ACTION_TYPES.REMOVE_PRODUCT_CART, newCartItems));
+      dispatch(remove_add(newCartItems));
 
       localStorage.setItem('cartItems', JSON.stringify(getState().cart.cartItems));
     }

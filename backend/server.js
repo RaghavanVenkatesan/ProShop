@@ -2,6 +2,7 @@ const express = require('express');
 const dotenv = require('dotenv');
 const connectDB = require('./config/db');
 const productRoutes = require('./routes/productRoutes');
+const userRoutes = require('./routes/userRoutes'); 
 const {notFound, errorHandler} = require('./middleware/errorMiddleware'); 
 
 // import express from 'express';
@@ -20,6 +21,11 @@ connectDB();
 const app = express();
 
 app.use('/api/products', productRoutes);
+app.use('/api/users', userRoutes);
+
+//parsing data from body
+app.use(express.json());
+app.use(express.urlencoded({extended: true}));
 
 //passing the 404 error to the error middleware
 // app.use((req, res, next) => {

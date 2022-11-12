@@ -16,6 +16,7 @@ const CartScreen = () => {
 
   //cartItems
   const cartitems = useSelector(selectCartItems);
+  console.log(cartitems);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
