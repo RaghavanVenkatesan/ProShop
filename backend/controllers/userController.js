@@ -5,6 +5,8 @@ const generateToken = require('../utils/generateToken');
 const authUser = asyncHandler(async (req, res) => {
 const { email, password } = req.body;
 
+// console.log(req.body);
+
 const user = await  User.findOne({ email });
 
 if(user && (await user.matchPassword(password))){

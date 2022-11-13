@@ -20,12 +20,14 @@ connectDB();
 
 const app = express();
 
+//parsing data from body
+app.use(express.json());
+app.use(express.urlencoded({extended: false}));
+
 app.use('/api/products', productRoutes);
 app.use('/api/users', userRoutes);
 
-//parsing data from body
-app.use(express.json());
-app.use(express.urlencoded({extended: true}));
+
 
 //passing the 404 error to the error middleware
 // app.use((req, res, next) => {

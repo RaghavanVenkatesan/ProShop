@@ -5,12 +5,24 @@ import logger from 'redux-logger';
 
 import { rootReducer } from './root-reducer';
 
+const cartItemsFromStorage = localStorage.getItem('cartItems') ?
+JSON.parse(localStorage.getItem('cartItems')) : []
+
+const userInfoFromStorage = localStorage.getItem('userInfo') ? 
+JSON.parse(localStorage.getItem('userInfo')) : null
+
+const initialState = {
+    cart: { cartItems: cartItemsFromStorage },
+    userLogin: { userInfo: userInfoFromStorage}
+}
+
 const middlewares = [process.env.NODE_ENV === "development" && logger, thunk].filter(Boolean);
 
 const store = configureStore({
     reducer: rootReducer,
     middleware: middlewares,
-    devTools: process.env.NODE_ENV !== 'production'
+    devTools: process.env.NODE_ENV !== 'production',
+    preloadedState: initialState
 })
 
 export default store;
