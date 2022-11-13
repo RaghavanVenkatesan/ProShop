@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
 import { fetchuserasyncstart } from '../store/reducers/user_details/user_details.action'
+import { updateuserasyncstart } from '../store/reducers/user_profile/user_profile.action';
 
 const ProfileScreen = () => {
   const [name, setName] = useState('')
@@ -21,6 +22,9 @@ const ProfileScreen = () => {
 
   const userLogin = useSelector((state) => state.userLogin)
   const { userInfo } = userLogin
+
+  const userUpdateProfile = useSelector((state) => state.userUpdateProfile)
+  const { success } = userUpdateProfile
 
   useEffect(() => {
     if (!userInfo) {
@@ -41,6 +45,7 @@ const ProfileScreen = () => {
       setMessage('Passwords do not match')
     } else {
         // DISPATCH UPDATE PROFILE
+        dispatch(updateuserasyncstart({ id: user._id, name, email, password }))
     }
   }
 
@@ -49,6 +54,7 @@ const ProfileScreen = () => {
     <h1>User Profile</h1>
       {message && <Message variant='danger'>{message}</Message>}
       {error && <Message variant='danger'>{error}</Message>}
+      {success && <Message variant='success'>Profile Updated</Message>}
       {loading && <Loader />}
       <Form onSubmit={submitHandler}>
         <Form.Group controlId='name'>
