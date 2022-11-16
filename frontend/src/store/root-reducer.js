@@ -7,6 +7,7 @@ import { userRegisterLogin } from "./reducers/user_register/user_register.reduce
 import { userDetailsReducer } from "./reducers/user_details/user_details.reducer";
 import { userUpdateProfileReducer } from "./reducers/user_profile/user_profile.reducer";
 import { ShippingReducer } from "./reducers/shipping/shipping.reducer";
+import { PaymentReducer } from "./reducers/payment/payment.reducer";
 
 export const rootReducer = combineReducers({
     productList: productReducer,
@@ -16,7 +17,8 @@ export const rootReducer = combineReducers({
     userRegister: userRegisterLogin,
     userDetails: userDetailsReducer,
     userUpdateProfile: userUpdateProfileReducer,
-    shippingdetails: ShippingReducer
+    shippingdetails: ShippingReducer,
+    paymentmethod: PaymentReducer
   });
 
 
