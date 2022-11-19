@@ -8,6 +8,7 @@ import CheckoutSteps from '../components/CheckoutSteps'
 // import { selectCartItems } from "../store/reducers/cart/cart.select";
 // import { selectaddress } from '../store/reducers/shipping/shipping.selector';
 // import { paymentselected } from '../store/reducers/payment/payment.selector'
+import { createOrder } from '../store/reducers/order/order.action'
 
 const PlaceOrderScreen = () => {
     const dispatch = useDispatch()
@@ -52,8 +53,27 @@ const PlaceOrderScreen = () => {
         Number(cart.taxPrice)
       ).toFixed(2)
 
+      const orderCreate = useSelector((state) => state.orderCreate)
+      const { order, success, error } = orderCreate;
+
+      useEffect(() => {
+        if (success) {
+          navigate(`/order/${order._id}`)
+        }
+      },[success])
+
       const placeOrderHandler = () => {
-        console.log("order");
+        dispatch(
+          createOrder({
+            orderItems: cart.cartItems,
+            shippingAddress: shippingAddress,
+            paymentMethod: paymentMethod,
+            itemsPrice: cart.itemsPrice,
+            shippingPrice: cart.shippingPrice,
+            taxPrice: cart.taxPrice,
+            totalPrice: cart.totalPrice
+          })
+        )
       }
 
       return (
@@ -141,9 +161,9 @@ const PlaceOrderScreen = () => {
                       <Col>${cart.totalPrice}</Col>
                     </Row>
                   </ListGroup.Item>
-                  {/* <ListGroup.Item>
+                  <ListGroup.Item>
                     {error && <Message variant='danger'>{error}</Message>}
-                  </ListGroup.Item> */}
+                  </ListGroup.Item>
                   <ListGroup.Item>
                     <Button
                       type='button'
