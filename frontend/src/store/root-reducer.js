@@ -9,6 +9,7 @@ import { userUpdateProfileReducer } from "./reducers/user_profile/user_profile.r
 import { ShippingReducer } from "./reducers/shipping/shipping.reducer";
 import { PaymentReducer } from "./reducers/payment/payment.reducer";
 import { orderCreateReducer } from "./reducers/order/order.reducer";
+import { orderDetailsReducer } from "./reducers/order_details/order_details.reducer";
 
 export const rootReducer = combineReducers({
     productList: productReducer,
@@ -20,7 +21,8 @@ export const rootReducer = combineReducers({
     userUpdateProfile: userUpdateProfileReducer,
     shippingdetails: ShippingReducer,
     paymentmethod: PaymentReducer,
-    orderCreate: orderCreateReducer
+    orderCreate: orderCreateReducer,
+    orderDetails: orderDetailsReducer,
   });
 
 
