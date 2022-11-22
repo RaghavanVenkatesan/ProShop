@@ -18,7 +18,7 @@ const shippingAddressFromStorage = localStorage.getItem('shippingAddress')
 const initialState = {
     cart: { cartItems: cartItemsFromStorage },
     userLogin: { userInfo: userInfoFromStorage},
-    shippingAddress: { shippingAddress: shippingAddressFromStorage}
+    shippingdetails: { shippingAddress: shippingAddressFromStorage}
 }
 
 const middlewares = [process.env.NODE_ENV === "development" && logger, thunk].filter(Boolean);
