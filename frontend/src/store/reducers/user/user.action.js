@@ -1,6 +1,8 @@
 import { USER_ACTION_TYPES } from "./user.types";
 import  createAction  from "../../utils/action";
 import axios from 'axios';
+import { reset_my_order } from "../order_list/order_list.actions";
+import { reset_user } from "../user_details/user_details.action";
 
 export const fetchuserstart = () => {
     return createAction(USER_ACTION_TYPES.USER_LOGIN_REQUEST);
@@ -44,5 +46,7 @@ export const logout = () => {
     return async(dispatch) => {
         localStorage.removeItem('userInfo');
         dispatch(fetchlogout());
+        dispatch(reset_my_order());
+        dispatch(reset_user());
     }
 }
