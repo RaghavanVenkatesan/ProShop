@@ -1,9 +1,12 @@
 const express = require('express');
 const router  = express.Router();
-const { authUser, getUserProfile, registerUser, updateUserProfile } = require('../controllers/userController');
-const protect = require('../middleware/authMiddleware');
+const { authUser, getUserProfile, registerUser, updateUserProfile, getUsers } = require('../controllers/userController');
 
-router.route('/').post(registerUser)
+// this on e causing the error
+const  protect  = require('../middleware/authMiddleware');
+const admin = require('../middleware/authUserMiddleware');
+
+router.route('/').post(registerUser).get(protect, admin, getUsers)
 router.post('/login', authUser)
 router.route('/profile')
       .get(protect, getUserProfile)
