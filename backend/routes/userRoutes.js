@@ -1,8 +1,8 @@
 const express = require('express');
 const router  = express.Router();
-const { authUser, getUserProfile, registerUser, updateUserProfile, getUsers } = require('../controllers/userController');
+const { authUser, getUserProfile, registerUser, updateUserProfile, getUsers, deleteUser, getUserById, updateUser} = require('../controllers/userController');
 
-// this on e causing the error
+// this one causing the error
 const  protect  = require('../middleware/authMiddleware');
 const admin = require('../middleware/authUserMiddleware');
 
@@ -11,5 +11,9 @@ router.post('/login', authUser)
 router.route('/profile')
       .get(protect, getUserProfile)
       .put(protect, updateUserProfile)
+router.route('/:id')
+      .delete(protect, admin, deleteUser)
+      .get(protect, admin, getUserById)
+      .put(protect, admin, updateUser)      
 
 module.exports = router;

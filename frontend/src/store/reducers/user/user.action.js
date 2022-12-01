@@ -3,6 +3,7 @@ import  createAction  from "../../utils/action";
 import axios from 'axios';
 import { reset_my_order } from "../order_list/order_list.actions";
 import { reset_user } from "../user_details/user_details.action";
+import { reset_list } from "../user_lists/user_list.action";
 
 export const fetchuserstart = () => {
     return createAction(USER_ACTION_TYPES.USER_LOGIN_REQUEST);
@@ -48,5 +49,18 @@ export const logout = () => {
         dispatch(fetchlogout());
         dispatch(reset_my_order());
         dispatch(reset_user());
+        dispatch(reset_list());
     }
 }
+
+// userContollers - deleteUser
+// userRoutes = delete
+
+// userconstanst - User_Delete_REQUEST
+// userReducers - UserDeleteReducers
+// store
+// userActions - deleteUser
+// userListScreen
+
+// userControllers - getUserById, updateUser
+// userRoutes = 
