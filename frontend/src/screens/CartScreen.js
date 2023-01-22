@@ -10,6 +10,9 @@ const CartScreen = () => {
   //product id
   let { id } = useParams();
 
+  // use the useLocation prop in react router
+  // const qty = location.search ? Number(location.search.split('=')[1]) : 1
+
   // quantity
   const [searchParams] = useSearchParams();
   let quantity = searchParams.get('qty');
@@ -32,7 +35,7 @@ const CartScreen = () => {
   }
 
   const checkoutHandler = () => {
-    navigate('/login?redirect=shipping');
+    navigate('/shipping');
   }
 
   return (
