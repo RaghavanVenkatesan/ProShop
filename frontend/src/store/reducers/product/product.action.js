@@ -11,11 +11,11 @@ createAction(PRODUCT_ACTION_TYPES.FETCH_PRODUCT_SUCCESS, productsarray);
 export const fetchProductsFailure = (error) => 
 createAction(PRODUCT_ACTION_TYPES.FETCH_PRODUCT_FAILED, error);
 
-export const fetchProductsStartAsync = () => {
+export const fetchProductsStartAsync = (keyword = '', pageNumber = '') => {
     return async (dispatch) => {
         dispatch(fectProductsStart());
         try{
-             const { data } = await axios.get('/api/products');
+             const { data } = await axios.get(`/api/products?keyword=${keyword}&pageNumber=${pageNumber}`);
              dispatch(fetchProductsSuccess(data)); 
         }catch(error){
               let error_payload = error.response && error.response.data.message ? error.response.data.message : error.message

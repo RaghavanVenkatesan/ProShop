@@ -20,7 +20,8 @@ import { userUpdateReducer } from "./reducers/user_detail_update/user_detail_upd
 import { productCreateReducer } from "./reducers/product_create/product_create.reducer";
 import { productUpdateReducer } from "./reducers/product_update/product_update.reducer";
 import { productDeleteReducer } from "./reducers/product_delete/product_delete.reducer";
-
+import { productReviewCreateReducer } from "./reducers/user_review/user_review.reducer";
+import { productTopRatedReducer } from "./reducers/top_products/top_product.reducer";
 
 export const rootReducer = combineReducers({
     productList: productReducer,
@@ -28,6 +29,8 @@ export const rootReducer = combineReducers({
     productDelete: productDeleteReducer,
     productCreate: productCreateReducer,
     productUpdate: productUpdateReducer,
+    productReviewCreate: productReviewCreateReducer,
+    productTopRated: productTopRatedReducer,
     cart: cartReducer,
     userLogin: userLoginReducer,
     userRegister: userRegisterLogin,

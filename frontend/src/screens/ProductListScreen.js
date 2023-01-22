@@ -1,23 +1,28 @@
 import React, { useEffect } from 'react'
 import { LinkContainer } from 'react-router-bootstrap'
 import { Table, Button, Row, Col } from 'react-bootstrap'
+import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
-// import Paginate from '../components/Paginate'
+import Paginate from '../components/Paginate'
 import { useNavigate } from 'react-router-dom'
 import { createProduct } from '../store/reducers/product_create/product_create.action'
 import { deleteProduct } from '../store/reducers/product_delete/product_delete.actions'
-
+import { fetchProductsStartAsync } from '../store/reducers/product/product.action'
 import { productReset } from '../store/reducers/product_create/product_create.action'
 
-const ProductListScreen = ({ history, match }) => {
+const ProductListScreen = () => {
+
+  let { pageNumber } = useParams();
+
+  let pageselected = pageNumber ? pageNumber : 1;
 
   const navigate = useNavigate() 
   const dispatch = useDispatch()
 
   const productList = useSelector((state) => state.productList)
-  const { isLoading, error, products } = productList
+  const { isLoading, error, products, page, pages } = productList
 
   const productDelete = useSelector((state) => state.productDelete)
   const {
@@ -46,7 +51,9 @@ const ProductListScreen = ({ history, match }) => {
 
     if (successCreate) {
       navigate(`/admin/product/${createdProduct._id}/edit`)
-    } 
+    } else {
+      dispatch(fetchProductsStartAsync('', pageselected))
+    }
   }, [
     dispatch,
     navigate,
@@ -54,6 +61,7 @@ const ProductListScreen = ({ history, match }) => {
     successDelete,
     successCreate,
     createdProduct,
+    pageselected
   ])
 
   const deleteHandler = (id) => {
@@ -125,7 +133,7 @@ const ProductListScreen = ({ history, match }) => {
               ))}
             </tbody>
           </Table>
-          {/* <Paginate pages={pages} page={page} isAdmin={true} /> */}
+          <Paginate pages={pages} page={page} isAdmin={true} />
         </>
       )}
     </>

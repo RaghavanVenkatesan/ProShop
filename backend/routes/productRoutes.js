@@ -1,6 +1,6 @@
 const express = require('express');
 const router  = express.Router();
-const { getProducts, getProductById, createProduct, updateProduct, deleteProduct } = require('../controllers/productController');
+const { createProductReview, getProducts, getProductById, createProduct, updateProduct, deleteProduct, getTopProducts } = require('../controllers/productController');
 
 // this one causing the error
 const  protect  = require('../middleware/authMiddleware');
@@ -12,6 +12,8 @@ const admin = require('../middleware/authUserMiddleware');
 // }))
 
 router.route('/').get(getProducts).post(protect, admin, createProduct);
+router.route('/:id/reviews').post(protect, createProductReview);
+router.get('/top', getTopProducts);
 router.route('/:id').get(getProductById).delete(protect, admin, deleteProduct).put(protect, admin, updateProduct);
 
 // router.get('/:id', asyncHandler(async (req, res) => {
