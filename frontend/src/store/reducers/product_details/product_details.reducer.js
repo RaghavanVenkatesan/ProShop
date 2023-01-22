@@ -2,7 +2,7 @@ import { PRODUCT_Details_ACTION_TYPES } from './product_details.types';
 
 const INITIAL_STATE = {
   product: {
-    review: []
+    reviews: []
   },
   isLoading: false,
   error: null,

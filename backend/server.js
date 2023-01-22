@@ -5,6 +5,7 @@ const productRoutes = require('./routes/productRoutes');
 const userRoutes = require('./routes/userRoutes'); 
 const orderRoutes = require('./routes/orderRoutes'); 
 const uploadRoutes = require('./routes/uploadRoutes');
+const morgan = require('morgan');
 const {notFound, errorHandler} = require('./middleware/errorMiddleware'); 
 const path = require('path');
 
@@ -40,7 +41,7 @@ app.get('/api/config/paypal', (req, res) =>
     res.send(process.env.PAYPAL_CLIENT_ID)
 )
 
-const __dirname = path.resolve()
+// const __dirname = path.resolve()
 app.use('/uploads', express.static(path.join(__dirname, '/uploads')))
 
 

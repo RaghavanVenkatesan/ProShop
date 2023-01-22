@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import { Form, Button } from 'react-bootstrap'
 
+import './SearchBox.css';
+
 const SearchBox = ({navigate}) => {
   const [keyword, setKeyword] = useState('')
 
@@ -14,7 +16,7 @@ const SearchBox = ({navigate}) => {
   }
 
   return (
-    <Form onSubmit={submitHandler} inline>
+    <Form onSubmit={submitHandler} inline className='search'>
       <Form.Control
         type='text'
         name='q'

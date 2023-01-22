@@ -1,0 +1,10 @@
+.search{
+    position: relative;
+}
+
+.search input{
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 300px;
+}
