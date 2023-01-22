@@ -44,7 +44,14 @@ app.get('/api/config/paypal', (req, res) =>
 // const __dirname = path.resolve()
 app.use('/uploads', express.static(path.join(__dirname, '/uploads')))
 
+// production
+if(process.env.NODE_ENV === 'production') {
+  // render the index.html file of build
+  app.use(express.static(path.join(__dirname, '/frontend/build')))
 
+  // if the above routes don't match go to index.html file of build
+  app.get('*', (req, res) => res.sendFile(path.resolve(__dirname, 'frontend', 'build', 'index.html')))
+}
 
 //passing the 404 error to the error middleware
 // app.use((req, res, next) => {
